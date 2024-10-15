@@ -22,25 +22,37 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('home.page') }}">Dashboard</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Obat
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
-                            <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
-                            <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('user.home') }}">Kelola AKun</a>
-                    </li>
+                    @if (Auth::check())
+                        @if (Auth::user()->role == 'admin')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Obat
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user.home') }}" aria-current="page" class="nav-link">Kelola Akun</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="#" aria-current="page"
+                                    class="nav-link">Pembelian</a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
