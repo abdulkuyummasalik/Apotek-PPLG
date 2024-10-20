@@ -45,7 +45,7 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="#" aria-current="page"
+                                <a href="{{ route('kasir.order.index') }}" aria-current="page"
                                     class="nav-link">Pembelian</a>
                             </li>
                         @endif

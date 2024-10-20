@@ -21,6 +21,13 @@ class UserSeeder extends Seeder
             'role' => 'admin'
         ]);
 
+        User::create([
+            'name' => 'Cashier',
+            'email' => 'cashier@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'cashier'
+        ]);
+
         $faker = Faker::create();
 
         for ($i = 0; $i < 10; $i++) {

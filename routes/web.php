@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LandingPageControllers;
 
 /*
@@ -72,8 +73,13 @@ Route::middleware(['isLogin', 'isAdmin'])->group(function () {
 
 Route::middleware(['isLogin', 'isKasir'])->group(function () {
     Route::prefix('/kasir')->name('kasir.')->group(function () {
-        Route::get('/home', function () {
-            return view('welcome');
-        })->name('home');
+        Route::prefix('/order')->name('order.')->group(function () {
+            Route::get('/', [OrderController::class, 'index'])->name('index');
+            Route::get('/create', [OrderController::class, 'create'])->name('create');
+            Route::post('/store', [OrderController::class, 'store'])->name('store');
+            Route::get('/print/{id}', [OrderController::class, 'show'])->name('print');
+            Route::get('download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
+            Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
+        });
     });
 });
