@@ -17,12 +17,16 @@ class OrderController extends Controller
     {
         $tanggal = request('tanggal');
         $query = Order::with('user');
+
         if ($tanggal) {
             $query->whereDate('created_at', $tanggal);
         }
-        $orders = $query->simplePaginate();
+
+        $orders = $query->orderBy('created_at', "DESC")->simplePaginate(10);
+
         return view('order.kasir.index', compact('orders', 'tanggal'));
     }
+
 
     /**
      * Show the form for creating a new resource.

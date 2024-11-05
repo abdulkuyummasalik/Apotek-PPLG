@@ -56,12 +56,15 @@
                         <td>{{ $item['user']['name'] }}</td>
                         <td>{{ \Carbon\Carbon::parse($item['created_at'])->translatedFormat('j F Y') }}</td>
                         <td>
-                            <a href="{{ route('kasir.order.download', $item['id']) }}" class="btn btn-secondary">Download
+                            <a href="#" class="btn btn-secondary">Download
                                 Struk</a>
-                            <form action="{{ route('kasir.order.destroy', $item['id']) }}" method="POST"
+                            {{-- <a href="{{ route('kasir.order.download', $item['id']) }}" class="btn btn-secondary">Download
+                                Struk</a> --}}
+                            <form action="#" method="POST"
                                 style="display:inline;"
                                 onsubmit="return confirm('Are you sure you want to delete this order?');">
                                 @csrf
+                                {{-- {{ route('kasir.order.destroy', $item['id']) }} --}}
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
