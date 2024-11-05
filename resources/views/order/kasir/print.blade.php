@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bukti Pembelian</title>
+    <title>Receipt PPLG</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
@@ -18,146 +18,167 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background-color: gray;
         }
 
         .receipt {
-            width: 450px;
+            width: 340px;
+            background-color: #ffffff;
             padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            color: #333;
-        }
-
-        .receipt-header,
-        .receipt-footer {
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 15px;
+            border-top: 4px solid #333;
+            border-bottom: 4px solid #333;
         }
 
-        .receipt-header h2 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .receipt-header p,
-        .receipt-footer p {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .divider {
-            border-top: 1px solid #ddd;
-            margin: 15px 0;
-        }
-
-        .table-title th {
+        .receipt h1 {
+            font-size: 1.2em;
             font-weight: bold;
             color: #333;
-            font-size: 1rem;
-            padding: 8px 0;
-            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        .receipt .date,
+        .receipt .info {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .receipt .info {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .receipt hr {
+            border: none;
+            border-top: 1px dashed #ddd;
+            margin: 12px 0;
+        }
+
+        .header,
+        .item,
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            padding: 6px 0;
+        }
+
+        .header {
+            font-weight: bold;
+            color: #444;
             border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
         }
 
-        .table-content td {
-            padding: 8px 0;
-            color: #555;
-            font-size: 0.9rem;
+        .item {
+            color: #333;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .item span {
+            width: 25%;
+            text-align: center;
+        }
+
+        .item .obat {
             text-align: left;
         }
 
-        .table-summary td {
-            padding: 8px 0;
-            color: #333;
+        .total {
             font-weight: bold;
-            font-size: 1rem;
-            text-align: left;
+            font-size: 1em;
+            margin-top: 10px;
         }
 
-        .total,
-        .ppn {
-            text-align: right;
-            font-size: 1rem;
+        .grand-total {
+            font-size: 1.1em;
             font-weight: bold;
-            color: #333;
+            color: #000;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 2px solid #333;
         }
 
-        .thank-you {
+        .footer {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 18px;
+            border-top: 1px dashed #ddd;
+            padding-top: 10px;
             text-align: center;
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #666;
         }
 
-        .btn-back {
-            display: block;
-            text-align: center;
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
             margin-top: 20px;
-            font-size: 0.9rem;
-            color: #555;
-            text-decoration: none;
-            padding: 10px 5px;
-            background-color: #ddd;
-            border-radius: 5px;
         }
 
-        .btn-back:hover {
-            background-color: #bbb;
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+            border: 1px solid #555;
         }
     </style>
 </head>
 
 <body>
-
     <div class="receipt">
-        <div class="receipt-header">
-            <h2>Apotek Jaya Abadi</h2>
-            <p>Alamat: Bogor, Jawa Barat</p>
-            <p>Email: apotekjayaabadi@gmail.com | Telepon: 0812 3456 789</p>
+        <h1>APOTEK PPLG</h1>
+        <p class="date">{{ \Carbon\Carbon::parse($order['created_at'])->translatedFormat('D m/d/Y h:ia') }}</p>
+        <p class="info">Cashier <span>{{ auth()->user()->name }}</span></p>
+        <p class="info">Customer <span>{{ $order['name_customer'] }}</span></p>
+        <hr>
+        <div class="header">
+            <span>Item</span>
+            <span>Qty</span>
+            <span>Unit</span>
+            <span>Total</span>
         </div>
-
-        <div class="divider"></div>
-
-        <table width="100%">
-            <thead class="table-title">
-                <tr>
-                    <th>Obat</th>
-                    <th>Total</th>
-                    <th>Harga</th>
-                </tr>
-            </thead>
-            <tbody class="table-content">
-                @foreach ($order['medicines'] as $medicine)
-                    <tr>
-                        <td>{{ $medicine['name_medicine'] }}</td>
-                        <td>{{ $medicine['qty'] }}</td>
-                        <td>Rp {{ number_format($medicine['price'], 0, ',', '.') }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tbody class="table-summary">
-                <tr>
-                    <td colspan="2" class="ppn">PPN (10%)</td>
-                    @php $ppn = $order['total_price'] * 0.1; @endphp
-                    <td>Rp {{ number_format($ppn, 0, ',', '.') }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="total">Total Harga</td>
-                    <td>Rp {{ number_format($order['total_price'], 0, ',', '.') }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="thank-you">
-            <p><strong>Terima Kasih Atas Pembeliannya!</strong></p>
-            <p>Apotek Jaya Abadi berharap Anda sehat selalu.</p>
+        @foreach ($order['medicines'] as $medicine)
+            <div class="item">
+                <span class="obat">{{ $medicine['name_medicine'] }}</span>
+                <span>{{ $medicine['qty'] }}</span>
+                <span>{{ number_format($medicine['price'], 0, ',', '.') }}</span>
+                <span>{{ number_format($medicine['sub_price'], 0, ',', '.') }}</span>
+            </div>
+        @endforeach
+        <div class="total">
+            @php $ppn = $order['price'] * 0.1; 
+            // dd($order['price'])
+            @endphp
+            <span>Tax</span>
+            <span>{{ number_format($ppn, 0, ',', '.') }}</span>
         </div>
-        <a href="{{ route('kasir.order.index') }}" class="btn-back">Kembali</a>
+        <div class="grand-total">
+            <span>TOTAL:</span>
+            <span>{{ number_format($order['total_price'], 0, ',', '.') }}</span>
+        </div>
+        <div class="footer">
+            Thank you for shopping with us! We hope to see you again.
+        </div>
+        <div class="button-group">
+            <button class="btn" onclick="window.print()">Print</button>
+            <a href="{{ route('kasir.order.index') }}" class="btn">Back</a>
+        </div>
     </div>
-
 </body>
 
 </html>

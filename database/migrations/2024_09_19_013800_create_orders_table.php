@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->json('medicines');
             $table->string('name_customer');
+            $table->integer('price');
             $table->integer('total_price');
             $table->timestamps();
         });

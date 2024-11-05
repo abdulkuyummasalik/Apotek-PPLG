@@ -75,12 +75,13 @@ class OrderController extends Controller
             $totalPrice += (int)$item['sub_price'];
         }
 
-        $priceWithPPN = $totalPrice + ($totalPrice * 0.01);
+        $priceWithPPN = $totalPrice + ($totalPrice * 0.1);
 
         $proces = Order::create([
             'user_id' => Auth::user()->id,
             'medicines' => $arrayAssocMedicines,
             'name_customer' => $request->name_customer,
+            'price' => $totalPrice,
             'total_price' => $priceWithPPN
         ]);
 
