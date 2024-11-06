@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Order;
 use App\Models\Medicine;
 use Illuminate\Http\Request;
@@ -55,7 +56,7 @@ class OrderController extends Controller
             $medicine = Medicine::where('id', $id)->first();
 
             if ($medicine->stock < $count) {
-                return redirect()->back()->with('failed', "Stok obat {$medicine->name} tidak mencukupi.");
+                return redirect()->back()->with('failed', "Stok obat {$medicine->name} : {$medicine->stock}. tidak mencukupi.")->withInput();
             }
 
             $subPrice = $medicine['price'] * $count;
@@ -130,5 +131,13 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function downloadPDF($id)
+    {
+        $order = Order::find($id)->toArray();
+        view()->share('order', $order);
+        $pdf = PDF::loadView('order.kasir.download-pdf', $order);
+        return $pdf->download('receipt.pdf');
     }
 }

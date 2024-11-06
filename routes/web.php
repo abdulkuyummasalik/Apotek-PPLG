@@ -78,6 +78,7 @@ Route::middleware(['isLogin', 'isKasir'])->group(function () {
             Route::get('/create', [OrderController::class, 'create'])->name('create');
             Route::post('/store', [OrderController::class, 'store'])->name('store');
             Route::get('/print/{id}', [OrderController::class, 'show'])->name('print');
+            Route::get('download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
         });
     });
 });

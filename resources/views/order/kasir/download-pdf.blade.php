@@ -175,8 +175,6 @@
             Thank you for shopping with us! We hope to see you again.
         </div>
         <div class="button-group">
-            <a href="{{ route('kasir.order.download', $order->id) }}" class="btn">Download</a>
-            <a href="{{ route('kasir.order.index') }}" class="btn">Back</a>
         </div>
     </div>
 </body>
