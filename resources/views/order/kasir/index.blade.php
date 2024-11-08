@@ -33,12 +33,9 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $no = 1;
-                @endphp
-                @foreach ($orders as $item)
+                @foreach ($orders as $index => $item)
                     <tr>
-                        <td class="text-center">{{ $no++ }}</td>
+                        <td class="text-center">{{ ($orders->currentPage() - 1) * $orders->perPage() + ($index + 1) }}</td>
                         <td>{{ $item['name_customer'] }}</td>
                         <td>
                             @foreach ($item['medicines'] as $medicine)
@@ -55,26 +52,16 @@
                         <td>Rp {{ number_format($item['total_price'], 0, ',', '.') }}</td>
                         <td>{{ $item['user']['name'] }}</td>
                         <td>{{ \Carbon\Carbon::parse($item['created_at'])->translatedFormat('j F Y') }}</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary">Download
+                        <td class="text-center">
+                            <a href="{{ route('kasir.order.download', $item->id) }}" class="btn btn-secondary">Download
                                 Struk</a>
-                            {{-- <a href="{{ route('kasir.order.download', $item['id']) }}" class="btn btn-secondary">Download
-                                Struk</a> --}}
-                            <form action="#" method="POST"
-                                style="display:inline;"
-                                onsubmit="return confirm('Are you sure you want to delete this order?');">
-                                @csrf
-                                {{-- {{ route('kasir.order.destroy', $item['id']) }} --}}
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end my-3">
             @if ($orders->count())
                 {{ $orders->links() }}
             @endif

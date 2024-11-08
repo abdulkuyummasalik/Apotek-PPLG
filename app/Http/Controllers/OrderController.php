@@ -55,11 +55,25 @@ class OrderController extends Controller
         foreach ($arrayDistinct as $id => $count) {
             $medicine = Medicine::where('id', $id)->first();
 
+            // if ($medicine->stock < $count) {
+            //     return redirect()->back()->with('failed', "Stok obat {$medicine->name} : {$medicine->stock}. tidak mencukupi.")->withInput();
+            // }
+            // else{
+            //     // $medicine->stock -= $count;
+            //     $medicine->save();
+            // }
+
             if ($medicine->stock < $count) {
-                return redirect()->back()->with('failed', "Stok obat {$medicine->name} : {$medicine->stock}. tidak mencukupi.")->withInput();
+                $valueBefore = [
+                    'name_customer' => $request->name_customer,
+                    'medicines' => $request->medicines,
+                ];
+                $msg = "Stok obat {$medicine->name} : {$medicine->stock}. tidak mencukupi.";
+                return redirect()->back()->with('failed', $msg)->withInput($valueBefore);
             }
 
             $subPrice = $medicine['price'] * $count;
+
             $arrayItem = [
                 'id' => $id,
                 'name_medicine' => $medicine['name'],
@@ -130,7 +144,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        // dek
     }
 
     public function downloadPDF($id)
