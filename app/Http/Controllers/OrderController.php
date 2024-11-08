@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Order;
 use App\Models\Medicine;
 use Illuminate\Http\Request;

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt PPLG</title>
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -18,32 +19,34 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: gray;
+            background-color: #f4f4f4;
+            padding: 20px;
         }
 
         .receipt {
-            width: 340px;
+            width: 350px;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-top: 4px solid #333;
-            border-bottom: 4px solid #333;
+            border-top: 4px solid #3498db;
+            border-bottom: 4px solid #3498db;
+            overflow: hidden;
         }
 
         .receipt h1 {
-            font-size: 1.2em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .receipt .date,
         .receipt .info {
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .receipt .info {
@@ -63,25 +66,25 @@
         .total {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9em;
+            font-size: 0.95em;
             padding: 6px 0;
         }
 
         .header {
             font-weight: bold;
-            color: #444;
+            color: #333;
             border-bottom: 1px solid #ddd;
             padding-bottom: 8px;
         }
 
         .item {
             color: #333;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             border-bottom: 1px dashed #eee;
         }
 
         .item span {
-            width: 25%;
+            width: 24%;
             text-align: center;
         }
 
@@ -122,19 +125,52 @@
 
         .btn {
             padding: 10px 20px;
-            background-color: #333;
+            background-color: #3498db;
             color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             transition: background 0.3s;
-            border: 1px solid #333;
+            border: 1px solid #3498db;
             cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #555;
-            border: 1px solid #555;
+            background-color: #2980b9;
+            border: 1px solid #2980b9;
+        }
+
+        /* Print Media Queries */
+        @media print {
+
+            body,
+            html {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .receipt {
+                width: 80%;
+                box-shadow: none;
+                border-top: none;
+                border-bottom: none;
+            }
+
+            .receipt .button-group {
+                display: none;
+            }
+
+            .btn {
+                display: none;
+            }
+
+            .footer {
+                font-size: 0.9em;
+                color: #555;
+                margin-top: 12px;
+            }
         }
     </style>
 </head>
@@ -161,9 +197,7 @@
             </div>
         @endforeach
         <div class="total">
-            @php $ppn = $order['price'] * 0.1; 
-            // dd($order['price'])
-            @endphp
+            @php $ppn = $order['price'] * 0.1; @endphp
             <span>Tax</span>
             <span>{{ number_format($ppn, 0, ',', '.') }}</span>
         </div>
@@ -174,8 +208,10 @@
         <div class="footer">
             Thank you for shopping with us! We hope to see you again.
         </div>
-        <div class="button-group">
-        </div>
+            {{-- <div class="button-group">
+                <a href="{{ route('kasir.order.download', $order->id) }}" class="btn">Download</a>
+                <a href="{{ route('kasir.order.index') }}" class="btn">Back</a>
+            </div> --}}
     </div>
 </body>
 
