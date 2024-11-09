@@ -55,14 +55,6 @@ class OrderController extends Controller
         foreach ($arrayDistinct as $id => $count) {
             $medicine = Medicine::where('id', $id)->first();
 
-            // if ($medicine->stock < $count) {
-            //     return redirect()->back()->with('failed', "Stok obat {$medicine->name} : {$medicine->stock}. tidak mencukupi.")->withInput();
-            // }
-            // else{
-            //     // $medicine->stock -= $count;
-            //     $medicine->save();
-            // }
-
             if ($medicine->stock < $count) {
                 $valueBefore = [
                     'name_customer' => $request->name_customer,
@@ -151,7 +143,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id)->toArray();
         view()->share('order', $order);
-        $pdf = PDF::loadView('order.kasir.download-pdf', $order);
+        $pdf = PDF::loadView('order.download-pdf', $order);
         return $pdf->download('receipt.pdf');
     }
 }

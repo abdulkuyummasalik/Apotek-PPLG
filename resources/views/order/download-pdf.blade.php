@@ -125,7 +125,7 @@
         }
 
         .ornament {
-            text-align: center;
+            text-align: center; 
             margin: 10px 0;
             font-size: 24px;
             letter-spacing: 10px;

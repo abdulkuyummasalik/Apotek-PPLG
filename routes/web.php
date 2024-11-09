@@ -49,36 +49,41 @@ Route::middleware('isLogin')->group(function () {
     })->name('home.page');
 });
 
-Route::middleware(['isLogin', 'isAdmin'])->group(function () {
-    Route::prefix('/medicine')->name('medicine.')->group(function () {
-        Route::get('/', [MedicineController::class, 'index'])->name('home');
-        Route::get('/create', [MedicineController::class, 'create'])->name('create');
-        Route::post('/store', [MedicineController::class, 'store'])->name('store');
-        Route::get('/{id}', [MedicineController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [MedicineController::class, 'update'])->name('update');
-        Route::delete('/{id}', [MedicineController::class, 'destroy'])->name('delete');
-        Route::get('/data/stock', [MedicineController::class, 'stock'])->name('stock');
-        Route::get('/data/stock/{id}', [MedicineController::class, 'stockEdit'])->name('stock.edit');
-        Route::patch('/data/stock/{id}', [MedicineController::class, 'stockUpdate'])->name('stock.update');
-    });
-    Route::prefix('/user')->name('user.')->group(function () {
-        Route::get('/create', [UserController::class, 'create'])->name('create');
-        Route::post('/store', [UserController::class, 'store'])->name('store');
-        Route::get('/', [UserController::class, 'index'])->name('home');
-        Route::get('/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}', [UserController::class, 'destroy'])->name('delete');
-    });
-});
-
-Route::middleware(['isLogin', 'isKasir'])->group(function () {
-    Route::prefix('/kasir')->name('kasir.')->group(function () {
-        Route::prefix('/order')->name('order.')->group(function () {
-            Route::get('/', [OrderController::class, 'index'])->name('index');
-            Route::get('/create', [OrderController::class, 'create'])->name('create');
-            Route::post('/store', [OrderController::class, 'store'])->name('store');
-            Route::get('/print/{id}', [OrderController::class, 'show'])->name('print');
-            Route::get('download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
+Route::middleware(['isLogin'])->group(function () {
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::prefix('/medicine')->name('medicine.')->group(function () {
+            Route::get('/', [MedicineController::class, 'index'])->name('home');
+            Route::get('/create', [MedicineController::class, 'create'])->name('create');
+            Route::post('/store', [MedicineController::class, 'store'])->name('store');
+            Route::get('/{id}', [MedicineController::class, 'edit'])->name('edit');
+            Route::patch('/{id}', [MedicineController::class, 'update'])->name('update');
+            Route::delete('/{id}', [MedicineController::class, 'destroy'])->name('delete');
+            Route::get('/data/stock', [MedicineController::class, 'stock'])->name('stock');
+            Route::get('/data/stock/{id}', [MedicineController::class, 'stockEdit'])->name('stock.edit');
+            Route::patch('/data/stock/{id}', [MedicineController::class, 'stockUpdate'])->name('stock.update');
         });
+        Route::prefix('/user')->name('user.')->group(function () {
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/', [UserController::class, 'index'])->name('home');
+            Route::get('/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::patch('/{id}', [UserController::class, 'update'])->name('update');
+            Route::delete('/{id}', [UserController::class, 'destroy'])->name('delete');
+        });
+    });
+
+    Route::middleware(['isKasir'])->group(function () {
+        Route::prefix('/kasir')->name('kasir.')->group(function () {
+            Route::prefix('/order')->name('order.')->group(function () {
+                Route::get('/create', [OrderController::class, 'create'])->name('create');
+                Route::post('/store', [OrderController::class, 'store'])->name('store');
+                Route::get('/print/{id}', [OrderController::class, 'show'])->name('print');
+            });
+        });
+    });
+
+    Route::prefix('order')->name('order.')->group(function(){
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
     });
 });

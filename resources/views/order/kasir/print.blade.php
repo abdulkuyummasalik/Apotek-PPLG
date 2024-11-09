@@ -164,9 +164,9 @@
 
 <body>
     <div class="button-container">
-        <a href="{{ route('kasir.order.index') }}" class="btn">← Kembali</a>
+        <a href="{{ route('order.index') }}" class="btn">← Kembali</a>
         <button onclick="window.print()" class="btn">Print</button>
-        <a href="{{ route('kasir.order.download', $order->id) }}" class="btn">Download PDF</a>
+        <a href="{{ route('order.download', $order->id) }}" class="btn">Download PDF</a>
     </div>
 
     <div class="receipt">

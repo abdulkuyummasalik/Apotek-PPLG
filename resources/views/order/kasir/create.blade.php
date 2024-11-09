@@ -49,7 +49,7 @@
                             <option selected hidden disabled>Pesanan 1</option>
                             @foreach ($medicines as $item)
                                 <option value="{{ $item['id'] }}" @if (in_array($item['id'], old('medicines', []))) selected @endif>
-                                    {{ $item['name'] }}
+                                    {{ $item['name'] }} : {{ $item->stock }}
                                 </option>
                             @endforeach
                         </select>

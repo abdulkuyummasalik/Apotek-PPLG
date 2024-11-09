@@ -38,14 +38,14 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
+                                <a class="nav-link active" aria-current="page" href="{{ route('order.index') }}">Pembelian</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.home') }}" aria-current="page" class="nav-link">Kelola Akun</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="{{ route('kasir.order.index') }}" aria-current="page"
+                                <a href="{{ route('order.index') }}" aria-current="page"
                                     class="nav-link">Pembelian</a>
                             </li>
                         @endif

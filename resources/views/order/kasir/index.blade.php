@@ -16,7 +16,9 @@
                     <a href="{{ url()->current() }}" class="btn btn-secondary">Clear</a>
                 </div>
             </form>
+            @if (Auth::user()->role == 'cashier')
             <a href="{{ route('kasir.order.create') }}" class="btn btn-primary">Pembelian Baru</a>
+            @endif
         </div>
 
 
@@ -53,7 +55,7 @@
                         <td>{{ $item['user']['name'] }}</td>
                         <td>{{ \Carbon\Carbon::parse($item['created_at'])->translatedFormat('j F Y') }}</td>
                         <td class="text-center">
-                            <a href="{{ route('kasir.order.download', $item->id) }}" class="btn btn-secondary">Download
+                            <a href="{{ route('order.download', $item->id) }}" class="btn btn-secondary">Download
                                 Struk</a>
                         </td>
                     </tr>
