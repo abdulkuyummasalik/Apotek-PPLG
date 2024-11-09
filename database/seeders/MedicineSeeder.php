@@ -17,36 +17,81 @@ class MedicineSeeder extends Seeder
 
         // for ($i = 1; $i <= 20; $i++) {
         //     Medicine::create([
-        //         'name' =>implode('', array_rand(array_flip(range('a', 'z')), 5)),
+        //         'name' => implode('', array_rand(array_flip(range('a', 'z')), 5)),
         //         'type' => $types[array_rand($types)],
-        //         'price' => rand(1000, 50000),
+        //         'price' => rand(1, 50) * 1000,
         //         'stock' => rand(0, 50),
         //     ]);
         // }
 
-        // Medicine::create([
-        //     'name' => 'Bodrex',
-        //     'type' => $types[array_rand($types)],
-        //     'price' => 12000,
-        //     'stock' => rand(0, 50),
-        // ]);
-        // Medicine::create([
-        //     'name' => 'Mixagrip',
-        //     'type' => $types[array_rand($types)],
-        //     'price' => 15000,
-        //     'stock' => rand(0, 50),
-        // ]);
-        // Medicine::create([
-        //     'name' => 'Baygon',
-        //     'type' => $types[array_rand($types)],
-        //     'price' => 18000,
-        //     'stock' => rand(0, 50),
-        // ]);
         Medicine::create([
-            'name' => 'Alert',
+            'name' => 'Bodrex',
             'type' => $types[array_rand($types)],
-            'price' => 1000,
-            'stock' => 1,
+            'price' => 2000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Paracetamol',
+            'type' => $types[array_rand($types)],
+            'price' => 1500,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Amoxicillin',
+            'type' => $types[array_rand($types)],
+            'price' => 5000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'OBH Combi',
+            'type' => $types[array_rand($types)],
+            'price' => 8000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Betadine',
+            'type' => $types[array_rand($types)],
+            'price' => 7000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Antangin',
+            'type' => $types[array_rand($types)],
+            'price' => 3000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Panadol',
+            'type' => $types[array_rand($types)],
+            'price' => 2500,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Mixagrip',
+            'type' => $types[array_rand($types)],
+            'price' => 2000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Laserin',
+            'type' => $types[array_rand($types)],
+            'price' => 4000,
+            'stock' => rand(0, 50),
+        ]);
+
+        Medicine::create([
+            'name' => 'Komix',
+            'type' => $types[array_rand($types)],
+            'price' => 3000,
+            'stock' => rand(0, 50),
         ]);
     }
 }

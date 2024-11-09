@@ -17,7 +17,7 @@
                 </div>
             </form>
             @if (Auth::user()->role == 'cashier')
-            <a href="{{ route('kasir.order.create') }}" class="btn btn-primary">Pembelian Baru</a>
+                <a href="{{ route('kasir.order.create') }}" class="btn btn-primary">Pembelian Baru</a>
             @endif
         </div>
 
@@ -40,16 +40,16 @@
                         <td class="text-center">{{ ($orders->currentPage() - 1) * $orders->perPage() + ($index + 1) }}</td>
                         <td>{{ $item['name_customer'] }}</td>
                         <td>
-                            @foreach ($item['medicines'] as $medicine)
-                                <ol>
+                            <ol>
+                                @foreach ($item['medicines'] as $medicine)
                                     <li>
                                         {{ $medicine['name_medicine'] }}
                                         ({{ number_format($medicine['price'], 0, ',', '.') }})
                                         : Rp {{ number_format($medicine['sub_price'], 0, ',', '.') }}
                                         <small>qty{{ $medicine['qty'] }}</small>
                                     </li>
-                                </ol>
-                            @endforeach
+                                @endforeach
+                            </ol>
                         </td>
                         <td>Rp {{ number_format($item['total_price'], 0, ',', '.') }}</td>
                         <td>{{ $item['user']['name'] }}</td>
