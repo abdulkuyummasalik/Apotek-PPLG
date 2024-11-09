@@ -4,162 +4,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bukti Pembelian</title>
+    <title>Struk Pembelian</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            background: #f8f8f8;
+            color: #000;
+            padding: 20px;
+        }
+
+        .rr{
+            border: 1px solid #000;
+            background: #fff;
+
+        }
+        .receipt {
+            max-width: 800px;
+            margin: 5px;
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .items-table th {
+            border-bottom: 2px solid #000;
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .items-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total-section {
+            margin-top: 30px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 14px;
+        }
+
+        .total-row.final {
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 1px solid #000;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+        }
+
+        .thank-you {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            text-align: right;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .ornament {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 24px;
+            letter-spacing: 10px;
+        }
+    </style>
 </head>
-<style>
-    #back-wrap {
-        margin: 30px auto 0 auto;
-        width: 500px;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .btn-back {
-        width: fit-content;
-        padding: 8px 15px;
-        color: #fff;
-        background-color: #666;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-
-    #receipt {
-        box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
-        padding: 20px;
-        margin: 30px auto 0 auto;
-        width: 500px;
-        background: #fff;
-    }
-
-    h2 {
-        font-size: .9rem;
-    }
-
-    p {
-        font-size: .8rem;
-        color: #666;
-        line-height: 1.2rem
-    }
-
-    #top {
-        margin-top: 25px;
-    }
-
-    #top .info {
-        text-align: left;
-        margin: 20px 0;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    td {
-        padding: 5px 0 5px 15px;
-        border: 1px solid #eee;
-    }
-
-    .table-title {
-        font-size: .5rem;
-        background: #eee;
-    }
-
-    .service {
-        border-bottom: 1px solid #eee;
-    }
-
-    .item-text {
-        font: .7rem;
-    }
-
-    #legal-copy {
-        margin-top: 15px;
-    }
-
-    .btn-print {
-        float: right;
-        color: #333;
-    }
-</style>
 
 <body>
-
-    <div id="back-wrap">
-        {{-- <a href="{{ route('kasir.order.index') }}" class="btn-back">Kembali</a> --}}
-    </div>
-    <div id="receipt">
-        <center id="top">
-            <div class="info">
-                <h2>Apotek Jaya Abadi</h2>
-            </div>
-        </center>
-        <div id="mid">
-            <div class="info">
-                <p>
-                    Alamat : Bogor, Jawa Barat <br>
-                    Email : apoekjayaabadi@gmail.com <br>
-                    Telepon : 0812 3456 789 <br>
-                </p>
+    <div class="rr">
+    <div class="receipt">
+        <div class="header">
+            <div class="logo">Apotek PPLG XI-1</div>
+            <div class="ornament">* * * * *</div>
+            <div class="contact-info">
+                Bogor, Jawa Barat<br>
+                Email: apotekpplgxi1@smkwikrama.sch.id<br>
+                Telp: 0812 3456 789
             </div>
         </div>
-        <div id="bot">
-            <div id="table">
-                <table>
-                    <tr class="table-title">
-                        <td class="item">
-                            <h2>Obat</h2>
-                        </td>
-                        <td class="item">
-                            <h2>Total</h2>
-                        </td>
-                        <td class="rate">
-                            <h2>harga</h2>
-                        </td>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Obat</th>
+                    <th>Jumlah</th>
+                    <th>Unit</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($order['medicines'] as $medicine)
+                    <tr>
+                        <td>{{ $medicine['name_medicine'] }}</td>
+                        <td>{{ $medicine['qty'] }}</td>
+                        <td>{{ number_format($medicine['price'], 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($medicine['sub_price'], 0, ',', '.') }}</td>
                     </tr>
-                    @foreach ($order['medicines'] as $medicine)
-                        <tr class="service">
-                            <td class="table-item">
-                                <p class="item-text">{{ $medicine['name_medicine'] }}</p>
-                            </td>
-                            <td class="table-item">
-                                <p class="item-text">{{ $medicine['qty'] }}</p>
-                            </td>
-                            <td class="table-item">
-                                <p class="item-text">Rp {{ number_format($medicine['price'], 0, ',', '.') }}</p>
-                            </td>
-                        </tr>
-                    @endforeach
-                    <tr class="table-title">
-                        <td></td>
-                        <td class="rate">
-                            <h2>PPN (10%)</h2>
-                            @php $ppn = $order['price'] * 0.1; @endphp
-                        </td>
-                        <td class="payment">
-                            <h2>Rp {{ number_format($ppn, 0, ',', '.') }}</h2>
-                        </td>
-                    </tr>
-                    <tr class="table-title">
-                        <td></td>
-                        <td class="rate">
-                            <h2>Total Harga</h2>
-                        </td>
-                        <td class="payment">
-                            <h2>Rp {{ number_format($order['total_price'], 0, ',', '.') }}</h2>
-                        </td>
-                    </tr>
-                </table>
+                @endforeach
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span>PPN (10%)</span>
+                <span>Rp {{ number_format($order['price'] * 0.1, 0, ',', '.') }}</span>
             </div>
-            <div id="legal-copy">
-                <p class="legal"><strong>Terima Kasih Atas Pembeliannya!</strong>Lorem ipsum dolor sit amet
-                    consectetur, adipisicing elit. Deserunt ullam consectetur commodi ducimus voluptate sit ea, dolores
-                    quo minus vero.</p>
+            <div class="total-row final">
+                <span>Total Pembayaran</span>
+                <span>Rp {{ number_format($order['total_price'], 0, ',', '.') }}</span>
             </div>
         </div>
-    </div>
+        
+        <div class="footer">
+            <div class="thank-you">Terima Kasih</div>
+            <div class="footer-text">
+                Semoga lekas sembuh dan sehat selalu
+            </div>
+        </div>
 
+        <div class="timestamp">
+            {{ \Carbon\Carbon::parse($order['created_at'])->translatedFormat('d/m/Y H:i:s') }}
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

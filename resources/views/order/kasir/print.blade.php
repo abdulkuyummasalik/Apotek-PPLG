@@ -4,213 +4,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipt PPLG</title>
+    <title>Struk Pembelian</title>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-
-        .receipt {
-            width: 350px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            border-top: 4px solid #3498db;
-            border-bottom: 4px solid #3498db;
-            overflow: hidden;
-        }
-
-        .receipt h1 {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .receipt .date,
-        .receipt .info {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 6px;
-        }
-
-        .receipt .info {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-        }
-
-        .receipt hr {
-            border: none;
-            border-top: 1px dashed #ddd;
-            margin: 12px 0;
-        }
-
-        .header,
-        .item,
-        .total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95em;
-            padding: 6px 0;
-        }
-
-        .header {
-            font-weight: bold;
-            color: #333;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
-        }
-
-        .item {
-            color: #333;
-            padding-bottom: 6px;
-            border-bottom: 1px dashed #eee;
-        }
-
-        .item span {
-            width: 24%;
-            text-align: center;
-        }
-
-        .item .obat {
-            text-align: left;
-        }
-
-        .total {
-            font-weight: bold;
-            font-size: 1em;
-            margin-top: 10px;
-        }
-
-        .grand-total {
-            font-size: 1.1em;
-            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            background: #f8f8f8;
             color: #000;
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 2px solid #333;
+            padding: 20px;
         }
 
-        .footer {
-            font-size: 0.8em;
-            color: #888;
-            margin-top: 18px;
-            border-top: 1px dashed #ddd;
-            padding-top: 10px;
-            text-align: center;
-        }
-
-        .button-group {
+        .button-container {
+            max-width: 800px;
+            margin: 0 auto 20px;
             display: flex;
-            justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            justify-content: flex-end;
         }
 
         .btn {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #ffffff;
+            padding: 8px 16px;
+            background: #000;
+            color: #fff;
+            border: 1px solid #000;
             text-decoration: none;
-            border-radius: 5px;
             font-weight: bold;
-            transition: background 0.3s;
-            border: 1px solid #3498db;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         .btn:hover {
-            background-color: #2980b9;
-            border: 1px solid #2980b9;
+            background: #fff;
+            color: #000;
         }
 
-        /* Print Media Queries */
-        @media print {
+        .receipt {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #000;
+            position: relative;
+        }
 
-            body,
-            html {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+        .receipt::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #000;
+            pointer-events: none;
+        }
 
-            .receipt {
-                width: 80%;
-                box-shadow: none;
-                border-top: none;
-                border-bottom: none;
-            }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+        }
 
-            .receipt .button-group {
-                display: none;
-            }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-            .btn {
-                display: none;
-            }
+        .contact-info {
+            font-size: 14px;
+            line-height: 1.6;
+        }
 
-            .footer {
-                font-size: 0.9em;
-                color: #555;
-                margin-top: 12px;
-            }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .items-table th {
+            border-bottom: 2px solid #000;
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .items-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total-section {
+            margin-top: 30px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 14px;
+        }
+
+        .total-row.final {
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 1px solid #000;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+        }
+
+        .thank-you {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            text-align: right;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .ornament {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 24px;
+            letter-spacing: 10px;
         }
     </style>
 </head>
 
 <body>
+    <div class="button-container">
+        <a href="{{ route('kasir.order.index') }}" class="btn">← Kembali</a>
+        <button onclick="window.print()" class="btn">Print</button>
+        <a href="{{ route('kasir.order.download', $order->id) }}" class="btn">Download PDF</a>
+    </div>
+
     <div class="receipt">
-        <h1>APOTEK PPLG</h1>
-        <p class="date">{{ \Carbon\Carbon::parse($order['created_at'])->translatedFormat('D m/d/Y h:ia') }}</p>
-        <p class="info">Cashier <span>{{ auth()->user()->name }}</span></p>
-        <p class="info">Customer <span>{{ $order['name_customer'] }}</span></p>
-        <hr>
         <div class="header">
-            <span>Item</span>
-            <span>Qty</span>
-            <span>Unit</span>
-            <span>Total</span>
-        </div>
-        @foreach ($order['medicines'] as $medicine)
-            <div class="item">
-                <span class="obat">{{ $medicine['name_medicine'] }}</span>
-                <span>{{ $medicine['qty'] }}</span>
-                <span>{{ number_format($medicine['price'], 0, ',', '.') }}</span>
-                <span>{{ number_format($medicine['sub_price'], 0, ',', '.') }}</span>
+            <div class="logo">Apotek PPLG XI-1</div>
+            <div class="ornament">* * * * *</div>
+            <div class="contact-info">
+                Bogor, Jawa Barat<br>
+                Email: apotekpplgxi1@smkwikrama.sch.id<br>
+                Telp: 0812 3456 789
             </div>
-        @endforeach
-        <div class="total">
-            @php $ppn = $order['price'] * 0.1; @endphp
-            <span>Tax</span>
-            <span>{{ number_format($ppn, 0, ',', '.') }}</span>
         </div>
-        <div class="grand-total">
-            <span>TOTAL:</span>
-            <span>{{ number_format($order['total_price'], 0, ',', '.') }}</span>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Obat</th>
+                    <th>Jumlah</th>
+                    <th>Unit</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($order['medicines'] as $medicine)
+                    <tr>
+                        <td>{{ $medicine['name_medicine'] }}</td>
+                        <td>{{ $medicine['qty'] }}</td>
+                        <td>{{ number_format($medicine['price'], 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($medicine['sub_price'], 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total-row">
+                <span>PPN (10%)</span>
+                <span>Rp {{ number_format($order['price'] * 0.1, 0, ',', '.') }}</span>
+            </div>
+            <div class="total-row final">
+                <span>Total Pembayaran</span>
+                <span>Rp {{ number_format($order['total_price'], 0, ',', '.') }}</span>
+            </div>
         </div>
+
+
         <div class="footer">
-            Thank you for shopping with us! We hope to see you again.
+            <div class="thank-you">Terima Kasih</div>
+            <div class="footer-text">
+                Semoga lekas sembuh dan sehat selalu
+            </div>
         </div>
-        <div class="button-group">
-            <a href="{{ route('kasir.order.download', $order->id) }}" class="btn">Download</a>
-            <a href="{{ route('kasir.order.index') }}" class="btn">Back</a>
+
+        <div class="timestamp">
+            {{ \Carbon\Carbon::parse($order['created_at'])->translatedFormat('d/m/Y H:i:s') }}
         </div>
     </div>
 </body>
