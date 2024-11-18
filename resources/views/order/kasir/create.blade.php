@@ -49,7 +49,7 @@
                             <option selected hidden disabled>Pesanan 1</option>
                             @foreach ($medicines as $item)
                                 <option value="{{ $item['id'] }}" @if (in_array($item['id'], old('medicines', []))) selected @endif>
-                                    {{ $item['name'] }} : {{ $item->stock }}
+                                    {{ $item['name'] }} : {{ $item->stock }} : {{ $item['price'] }}
                                 </option>
                             @endforeach
                         </select>
@@ -73,7 +73,7 @@
                 <select name="medicines[]" class="form-select mb-2">
                     <option selected hidden disabled>Pesanan ${no}</option>
                     @foreach ($medicines as $item)
-                        <option value="{{ $item['id'] }}">{{ $item['name'] }} : {{ $item->stock }}</option>
+                        <option value="{{ $item['id'] }}">{{ $item['name'] }} : {{ $item->stock }} : {{ $item['price'] }}</option>
                     @endforeach
                 </select>
                 <div class="text-danger p-4" style="cursor: pointer;" onclick="deleteSelect('medicines-${no}')">X</div>
