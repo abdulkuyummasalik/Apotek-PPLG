@@ -18,6 +18,8 @@
             </form>
             @if (Auth::user()->role == 'cashier')
                 <a href="{{ route('kasir.order.create') }}" class="btn btn-primary">Pembelian Baru</a>
+                @else
+                <a href="{{ route('order.export-excel') }}" class="btn btn-success">Export Data (excel)</a>
             @endif
         </div>
 

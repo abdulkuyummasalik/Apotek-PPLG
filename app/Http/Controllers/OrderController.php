@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Order;
 use App\Models\Medicine;
@@ -145,5 +147,17 @@ class OrderController extends Controller
         view()->share('order', $order);
         $pdf = PDF::loadView('order.download-pdf', $order);
         return $pdf->download('receipt.pdf');
+    }
+
+    // public function data()
+    // {
+    //     $orders = Order::with('user')->simplePaginate(5);
+    //     return view('order.admin.index', compact('orders'));
+    // }
+
+    public function exportExcel()
+    {
+        $file_name = 'data_pembelian'.'.xlsx';
+        return Excel::download(new OrdersExport, $file_name);
     }
 }

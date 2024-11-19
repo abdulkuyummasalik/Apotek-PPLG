@@ -85,5 +85,7 @@ Route::middleware(['isLogin'])->group(function () {
     Route::prefix('order')->name('order.')->group(function(){
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
+        // Route::get('/data', [OrderController::class, 'data'])->name('data');
+        Route::get('/export-pdf', [OrderController::class, 'exportExcel'])->name('export-excel');
     });
 });
