@@ -145,15 +145,23 @@ class OrderController extends Controller
     {
         $order = Order::find($id)->toArray();
         view()->share('order', $order);
-        $pdf = PDF::loadView('order.download-pdf', $order);
+        $pdf = PDF::loadView('order.kasir.download-pdf', $order);
         return $pdf->download('receipt.pdf');
     }
 
-    // public function data()
-    // {
-    //     $orders = Order::with('user')->simplePaginate(5);
-    //     return view('order.admin.index', compact('orders'));
-    // }
+    public function data()
+    {
+        $tanggal = request('tanggal');
+        $query = Order::with('user');
+
+        if ($tanggal) {
+            $query->whereDate('created_at', $tanggal);
+        }
+
+        $orders = $query->orderBy('created_at', "DESC")->simplePaginate(10);
+
+        return view('order.admin.index', compact('orders', 'tanggal'));
+    }
 
     public function exportExcel()
     {
