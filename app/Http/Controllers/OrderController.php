@@ -158,7 +158,7 @@ class OrderController extends Controller
             $query->whereDate('created_at', $tanggal);
         }
 
-        $orders = $query->orderBy('created_at', "DESC")->simplePaginate(10);
+        $orders = $query->orderBy( "created_at", "desc")->simplePaginate(10);
 
         return view('order.admin.index', compact('orders', 'tanggal'));
     }
